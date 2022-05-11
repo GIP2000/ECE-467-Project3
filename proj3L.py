@@ -116,8 +116,8 @@ checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
     filepath=checkpoint_prefix,
     save_weights_only=True)
 
-EPOCHS = 20
-
+EPOCHS = 50
+#%%
 history = model.fit(dataset, epochs=EPOCHS, callbacks=[checkpoint_callback])
 # %%
 class OneStep(tf.keras.Model):
@@ -167,7 +167,7 @@ class OneStep(tf.keras.Model):
 one_step_model = OneStep(model, chars_from_ids, ids_from_chars)
 start = time.time()
 states = None
-next_char = tf.constant(['ROMEO:'])
+next_char = tf.constant(['President'])
 result = [next_char]
 
 for n in range(1000):
@@ -181,3 +181,4 @@ print('\nRun time:', end - start)
 #%%
 tf.saved_model.save(one_step_model, 'one_step')
 one_step_reloaded = tf.saved_model.load('one_step')
+# %%
